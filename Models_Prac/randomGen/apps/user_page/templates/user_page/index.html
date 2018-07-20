@@ -4,9 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block title %}
     <title>User Page</title>
+    {% endblock %}
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 </head>
 <body>
+
+    <nav>
+        <a href="{% url 'home:index' %}">Home</a>
+
+        {% if request.session.logged_in %}
+            <a href="{% url 'logReg:logout' %}">Logout</a>
+        {% endif %}
+
+    </nav>
+    
+    
+    <header>
+        <h4>{{ request.session.user_name }}</h4>
+        <br>
+        <img id='profile_pic' src="{% static 'images/sample_profile.png' %}" alt="">
+    </header>
+
+    {% block content %}
+
+    <main>
+        <div>
+            <a href="{% url 'user_page:edit_bio' %}">Edit Bio</a> <br>
+        </div>
+
+        <div id='profile_thought_box'>
+            {% if user_thoughts %} {% for thought in user_thoughts %}
+            <p> Thought: {{ thought.content }} </p>
+            {% endfor %} {% endif %}
+        </div>
+    </main>
+
+    {% endblock %}
+    <br>
+    <hr>
     
 </body>
 </html>
