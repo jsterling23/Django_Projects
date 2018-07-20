@@ -1,0 +1,29 @@
+{% extends 'home/index.html' %}
+
+{% block content %}
+    <h3>Add your thought {{ request.session.user_name }} </h3>
+    <hr>
+    <br>
+     {% if messages %}
+    <div>
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %} {{ message }}
+                </li>
+                {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <br>
+
+    <form action="{% url 'home:process_add_thought' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="content">Thought: </label>
+            <br>
+            <textarea name="content" id="" cols="50" rows="15" placeholder="Enter thought here..."></textarea>
+        </div>
+        <input type="submit" value="Add thought..">
+    </form>
+{% endblock %}

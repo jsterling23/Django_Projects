@@ -1,0 +1,4 @@
+.first_name, .last_name, .email, .password, .confirm_password {
+    color: red;
+    font-size: 1.5em;
+}

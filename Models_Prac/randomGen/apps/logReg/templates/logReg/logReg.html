@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'logReg/logReg.css' %}" >
+    <title>Login</title>
+</head>
+<body>
+
+    <header>
+        <a href="{% url 'home:index' %}">Home</a>
+    </header>
+
+    <main>
+        <h3>Login</h3>
+        <br>
+        <form action="{% url "logReg:login" %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">Email: </label>
+                <input type="email" name="email" id="">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password">
+            </div>
+            <input type="submit" name="Login">
+        </form>
+        <br>
+        <hr>
+
+        <h2>Register</h2>
+
+            {% if messages %}
+            <ul class="messages">
+                 {% for message in messages %}
+                 <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                    {{ message }}
+                 </li>
+                 {% endfor %}
+            </ul>
+            {% endif %}
+            
+        <form action="{% url "logReg:register" %}" method="POST">
+             {% csrf_token %}
+            <div class="form-group">
+                <label for="first_name">First Name: </label>
+                <input type="text" name="first_name">
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name: </label>
+                <input type="text" name="last_name" id="">
+            </div>
+            <div class="form-group">
+                <label for="email">Email: </label>
+                <input type="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password: </label>
+                <input type="password" name="password">
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password: </label>
+                <input type="password" name="confirm_password">
+            </div>
+
+    <!-- end if messages -->
+            <input type="submit" value="Register">
+        </form>
+    </main>
+    <hr>
+    <footer>
+
+        {% for user in users %}
+        <ul>
+            <li>{{ user.first_name }}</li>
+            <li>{{ user.last_name }}</li>
+            <li>{{ user.email }}</li>
+            <li>{{ user.password }}</li>
+        </ul>
+        {% endfor %}
+    </footer>
+    
+</body>
+</html>

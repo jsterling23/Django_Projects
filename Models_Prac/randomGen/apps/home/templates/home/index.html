@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ 
+    <title>Home</title> 
+ 
+</head>
+<body>
+    <nav>
+        {% if request.session.logged_in %}
+        <a href="{% url 'logReg:logout' %}">Logout</a>
+        {% endif %}
+    </nav>
+    <hr>
+    <main>
+        {% block content %}
+
+
+        <h2>Welcome Home {{ request.session.user_name }}</h2>
+
+        <a href="{% url 'home:add_thoughts' %}">Add Thought...</a>
+
+        <div class="thoughts">
+            {% for thought in thoughts %}
+                ID: {{ thought.id }} <br>
+                Thought: {{ thought.content }} <br>
+                Name: {{ thought.user.first_name }} <br>
+                L,Name: {{ thought.user.last_name }} <br>
+                Email: {{ thought.user.email }} <br>
+                created_at: {{ thought.created_at }} <br>
+                updated_at: {{ thought.updated_at }} <br>
+
+                {% if thought.user.id == request.session.user_id %}
+                <a href="{% url 'home:edit_thought' thought.id %}">Edit</a> | <a href="{% url 'home:delete_thought' thought.id %}">Delete</a>
+                {% endif %}
+
+                <hr>
+
+            {% endfor %}
+        </div>
+       
+        <div>
+            <p>
+                test timezone: {{ timezone }}
+                <br>
+                test datetime: {{ datetime }}
+            </p>
+        </div>
+
+        {% endblock %}
+    </main>
+</body>
+</html>
+
+
