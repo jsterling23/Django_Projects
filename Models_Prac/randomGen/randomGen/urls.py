@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^', include('apps.home.urls', namespace='home')),
     url(r'^access/', include('apps.logReg.urls', namespace='logReg')),
     url(r'^quotes/', include("apps.quote_collector.urls", namespace="quotes")),
+    url(r'^user/', include('apps.user_page.urls', namespace='user_page')),
     url(r'^admin/', admin.site.urls),
 ]

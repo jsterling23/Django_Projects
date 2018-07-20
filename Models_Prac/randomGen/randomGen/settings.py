@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'apps.home',
     'apps.logReg',
     'apps.quote_collector',
+    'apps.user_page',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

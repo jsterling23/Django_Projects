@@ -1,10 +1,18 @@
-{% extends 'home/index.html' %} 
+{% extends 'home/index.html' %}
+
+{% block title %}
+<title>Change Your mind?</title>
+{% endblock %}
 
 {% block content %}
+<nav>
+    <a href="{% url 'home:index' %}">Return Home</a>
+</nav>
+
 <h3>Edit this thought...</h3>
 
 <div>
-   <p style='color:red'>{{ thought.content }}</p> 
+   <p style='color:red'>- {{ thought.content }}</p> 
 </div>
 
 {% if messages %}
@@ -25,7 +33,7 @@
     <div class="form-group">
         <label for="content">Edit: </label>
         <br>
-        <textarea name="content" id="" cols="50" rows="15" placeholder="Enter thought here..."></textarea>
+        <textarea name="content" id="" cols="50" rows="8" placeholder="Enter thought here..."></textarea>
     </div>
     <input type="submit" value="Submit Edit..">
 </form>
