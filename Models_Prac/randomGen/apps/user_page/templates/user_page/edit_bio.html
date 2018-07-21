@@ -7,10 +7,16 @@
 {% block content %}
     <h2>Update your Bio {{ request.session.user_name }}</h2>
     
-    <form action="" method="POST">
+    <form action="{% url 'user_page:process_edit_bio' %}" method="POST">
+        {% csrf_token %}
         <div class='form-group'>
             <label for="profile_bio">Bio: </label><br>
             <textarea name="profile_bio" id="" cols="30" rows="5"></textarea>
+        </div>
+        <br>
+        <div class='form-group'>
+            <label for="profile_hobbies">What are your hobbies?</label><br>
+            <textarea name="profile_hobbies" id="" cols="30" rows="5"></textarea>
         </div>
         <br>
         <div class='form-group'>
@@ -21,11 +27,6 @@
         <div class='form-group'>
             <label for="profile_home_town">Where did you grow up?</label>
             <input type="text" name="profile_home_town" id="">
-        </div>
-        <br>
-        <div class='form-group'>
-            <label for="profile_hobbies">What are your hobbies?</label><br>
-            <textarea name="profile_hobbies" id="" cols="30" rows="5"></textarea>
         </div>
         <br>
         <div class='form-group'>

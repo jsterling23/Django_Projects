@@ -33,15 +33,29 @@
     {% block content %}
 
     <main>
-        <div>
+        <div class='bio'>
+            <h3>A little about me</h3>
+            {% if bio %}
+                {% for i in bio %}
+                    <p>Bio: {{ i.profile_bio }}</p>
+                    <p>Birthday: {{ i.profile_birthday }}</p>
+                    <p>My Home Town: {{ i.profile_home_town }} </p>
+                    <p>My Hobbies are: {{ i.profile_hobbies }} </p>
+                    <p>My Favorite music is: {{ i.profile_favorite_genre }} </p>
+                {% endfor %}
+            {% endif %}
             <a href="{% url 'user_page:edit_bio' %}">Edit Bio</a> <br>
         </div>
-
+        
         <div id='profile_thought_box'>
-            {% if user_thoughts %} {% for thought in user_thoughts %}
-            <p> Thought: {{ thought.content }} </p>
-            {% endfor %} {% endif %}
+            <h3>These are my thoughts...</h3><br>
+            {% if user_thoughts %} 
+                {% for thought in user_thoughts %}
+                    <p>  -{{ thought.content }} </p>
+                {% endfor %} 
+            {% endif %}
         </div>
+
     </main>
 
     {% endblock %}

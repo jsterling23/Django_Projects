@@ -1,5 +1,6 @@
 #profile_pic {
     width: 200px;
+    border: 2px solid black;
 }
 
 #profile_thought_box {
